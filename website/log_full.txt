@@ -1,5 +1,0 @@
-WARNING:werkzeug: * Debugger is active!
-INFO:werkzeug: * Debugger PIN: 132-884-207
-INFO:werkzeug: * Detected change in 'C:\\Users\\human\\Desktop\\git\\Chat-Web-App\\website\\application\\database.py', reloading
-WARNING:werkzeug: * Debugger is active!
-INFO:werkzeug: * Debugger PIN: 132-884-207
