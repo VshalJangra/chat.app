@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chattr - {{title}}</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='style.css')}}" />
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
+    {% endblock head %}
+</head>
+
+<body>
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="{{ url_for('home') }}">Chattr</a>
+        </div>
+        <div class="uk-navbar-right">
+            {% if current_user.is_authenticated %}
+            <ul class='uk-navbar-nav'>
+                <li class="hover-over uk-visible@s"><a href="{{ url_for('my_teams') }}">Teams</a></li>
+                <li class="hover-over uk-visible@s"><a href="{{ url_for('create_team') }}">Create Team</a></li>
+                <li class="hover-over uk-visible@s"><a href="{{ url_for('account') }}">Account</a></li>
+                <li class="hover-over uk-visible@s"><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li class="hover-over uk-hidden@s"><a href="#" uk-toggle="target: #offcanvas-usage"><span
+                            uk-navbar-toggle-icon></span></a>
+            </ul>
+            {% else %}
+            <ul class='uk-navbar-nav'>
+                <li class="hover-over uk-visible@s"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="hover-over uk-visible@s"><a href="{{ url_for('login') }}">Login</a></li>
+                <li class="hover-over uk-visible@s"><a href="{{ url_for('register') }}">Register</a></li>
+                <li class="hover-over uk-hidden@s"><a href="#" uk-toggle="target: #offcanvas-usage"><span
+                            uk-navbar-toggle-icon></span></a>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+    <div id="offcanvas-usage" uk-offcanvas="overlay: true; flip: true;">
+        <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            {% if current_user.is_authenticated %}
+            <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+                <li><a href="{{ url_for('my_teams') }}">Teams</a></li>
+                <li><a href="{{ url_for('create_team') }}">Create Team</a></li>
+                <li><a href="{{ url_for('account') }}">Account</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+            {% else %}
+            <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+</body>
+
+</html>
